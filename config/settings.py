@@ -9,7 +9,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Segurança
 SECRET_KEY = os.environ.get('SECRET_KEY', 'unsafe-secret-key-dev')
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
-ALLOWED_HOSTS = ['*']  # Altere isso para segurança em produção
+ALLOWED_HOSTS = ['*']  # Altere isso para domínios específicos em produção
 
 # Aplicativos instalados
 INSTALLED_APPS = [
@@ -20,7 +20,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # App local
+    # Apps do projeto
     'portfolio',
 
     # Cloudinary
@@ -40,10 +40,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# URLs
+# Configuração de URLs e WSGI
 ROOT_URLCONF = 'config.urls'
 
-# Templates
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -62,7 +61,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-# Banco de Dados
+# Banco de dados (Render ou local)
 DATABASES = {
     'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
 }
@@ -81,32 +80,26 @@ TIME_ZONE = 'America/Sao_Paulo'
 USE_I18N = True
 USE_TZ = True
 
-# Arquivos estáticos (JS, CSS, etc.)
+# Arquivos estáticos (CSS, JS etc.)
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# -----------------------------
-# ✅ Cloudinary para arquivos de mídia
-# -----------------------------
+# Mídia (usado apenas localmente em modo DEBUG)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# Define o Cloudinary como storage para arquivos de mídia
+# Ajustes automáticos para produção no Render
+django_heroku.settings(locals())
+
+# ⚠️ Cloudinary (deve vir depois do django_heroku.settings)
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
-# Configurações do Cloudinary vindas do ambiente (Render)
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME'),
     'API_KEY': os.environ.get('CLOUDINARY_API_KEY'),
     'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET'),
 }
 
-# Não é mais necessário MEDIA_ROOT ou MEDIA_URL com Cloudinary
-# Mas se quiser manter local para testes locais, pode deixar:
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
 # Chave primária padrão
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-# Ajuste automático para deploy (Render, Heroku etc.)
-django_heroku.settings(locals())
