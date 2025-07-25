@@ -1,5 +1,6 @@
 from pathlib import Path
 import os
+import dj_database_url
 
 # Caminho base do projeto
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -56,10 +57,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 # Banco de Dados
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',  # substitua por PostgreSQL no deploy
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
 }
 
 # Validações de senha

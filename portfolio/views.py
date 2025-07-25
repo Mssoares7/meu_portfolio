@@ -1,5 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Projeto, Tecnologia, Publicacao
+from django.core.management import call_command
+from django.http import HttpResponse
 
 def home(request):
     projetos = Projeto.objects.all()
@@ -22,3 +24,7 @@ def projeto_detail(request, pk):
 def publicacoes(request):
     publicacoes = Publicacao.objects.order_by('-data_publicacao')
     return render(request, 'portfolio/publicacoes.html', {'publicacoes': publicacoes})
+
+def rodar_migracoes(request):
+    call_command('migrate')
+    return HttpResponse("Migrações aplicadas com sucesso.")
