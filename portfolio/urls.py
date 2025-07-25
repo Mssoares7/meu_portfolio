@@ -9,4 +9,5 @@ urlpatterns = [
     path('projetos/<int:pk>/', views.projeto_detail, name='projeto_detail'),
     path('publicacoes/', views.publicacoes, name='publicacoes'),
     path('rodar-migracoes/', views.rodar_migracoes, name='rodar_migracoes'),
+    path('criar-admin/', views.cria_superusuario, name='criar_superusuario'),
 ]

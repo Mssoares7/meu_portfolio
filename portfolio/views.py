@@ -28,3 +28,11 @@ def publicacoes(request):
 def rodar_migracoes(request):
     call_command('migrate')
     return HttpResponse("Migrações aplicadas com sucesso.")
+
+def cria_superusuario(request):
+    from django.contrib.auth.models import User
+    if not User.objects.filter(username="admin").exists():
+        User.objects.create_superuser("admin", "admin@example.com", "admin123")
+        return HttpResponse("Superusuário criado com sucesso.")
+    else:
+        return HttpResponse("Superusuário já existe.")
