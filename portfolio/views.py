@@ -3,6 +3,7 @@ from .models import Projeto, Tecnologia, Publicacao
 from django.core.management import call_command
 from django.http import HttpResponse
 from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 
 
 def home(request):
@@ -47,3 +48,19 @@ def redefinir_senha_admin(request):
         return HttpResponse("Senha redefinida com sucesso para 'admin321'.")
     except User.DoesNotExist:
         return HttpResponse("Usuário admin não encontrado.")
+
+def redefinir_senha_admin(request):
+    User = get_user_model()
+    username = "admin"
+    password = "admin321"
+
+    user, created = User.objects.get_or_create(username=username)
+    user.set_password(password)
+    user.is_staff = True
+    user.is_superuser = True
+    user.save()
+
+    if created:
+        return HttpResponse("Superusuário 'admin' criado com sucesso.")
+    else:
+        return HttpResponse("Senha redefinida para o usuário 'admin'.")
