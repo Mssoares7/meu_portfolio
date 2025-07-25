@@ -1,0 +1,289 @@
+/* Estrutura geral */
+body {
+  font-family: Arial, sans-serif;
+  margin: 2rem;
+  background: #f9f9f9;
+  color: #333;
+}
+
+h1, h2, h3 {
+  margin-top: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* Cabeçalho */
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 1rem 0;
+  border-bottom: 2px solid #e0e0e0;
+  margin-bottom: 2rem;
+}
+
+.logo-title h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.logo-title a {
+  color: #1a73e8;
+  font-weight: bold;
+}
+
+.main-nav {
+  display: flex;
+  gap: 1rem;
+}
+
+.main-nav a {
+  color: #444;
+  font-weight: 500;
+}
+
+.main-nav a:hover {
+  color: #1a73e8;
+}
+
+.lang-switch {
+  font-size: 0.9rem;
+}
+
+.lang-switch a {
+  color: #1a73e8;
+  font-weight: bold;
+  margin: 0 0.3rem;
+}
+
+.lang-switch a:hover {
+  text-decoration: underline;
+}
+
+/* Filtros */
+.filters {
+  margin-bottom: 1rem;
+}
+
+.filter-btn {
+  margin-right: 0.5rem;
+  padding: 0.4rem 1rem;
+  background: #eee;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.filter-btn.active {
+  background: #333;
+  color: white;
+}
+
+/* Projetos */
+.projetos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.projeto {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.projeto:hover {
+  transform: translateY(-5px);
+}
+
+.projeto img {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+}
+
+.projeto h3 {
+  font-size: 1.1rem;
+}
+
+.projeto p {
+  font-size: 0.9rem;
+  color: #444;
+  white-space: pre-line; /* mantém formatação com quebras de linha */
+}
+
+/* Links */
+.projeto a {
+  color: #1a73e8;
+  font-weight: bold;
+}
+
+.projeto a:hover {
+  text-decoration: underline;
+}
+
+/* Links de projeto */
+.project-links {
+  margin-top: 0.8rem;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  margin-bottom: 1rem;
+  background-color: #1a73e8;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #155ab6;
+}
+
+.btn.small {
+  font-size: 0.8rem;
+  padding: 0.4rem 0.8rem;
+  margin-right: 0.5rem;
+}
+
+/* Tags de tecnologia */
+.tech-tags {
+  margin-top: 0.5rem;
+}
+
+.tech-badge {
+  display: inline-block;
+  background-color: #e3f2fd;
+  color: #1a73e8;
+  font-size: 0.75rem;
+  font-weight: bold;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  margin-right: 0.4rem;
+}
+
+/* Currículo */
+.cv-section {
+  margin-bottom: 2rem;
+  background: white;
+  padding: 1rem 1.5rem;
+  border-left: 4px solid #1a73e8;
+  border-radius: 10px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+.cv-section h3 {
+  color: #1a73e8;
+  margin-bottom: 0.5rem;
+}
+
+.cv-section ul {
+  padding-left: 1.2rem;
+}
+
+.cv-section li {
+  margin-bottom: 0.8rem;
+}
+
+/* Animações */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease-out;
+}
+
+.fade-in.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Impressão */
+@media print {
+  body {
+    background: white;
+    color: black;
+    margin: 0;
+    font-size: 12pt;
+  }
+
+  header, footer, nav, .filters, .btn, .no-print {
+    display: none !important;
+  }
+
+  .cv-section {
+    border-left: 4px solid black;
+    box-shadow: none;
+    page-break-inside: avoid;
+  }
+
+  a {
+    color: black;
+    text-decoration: none;
+  }
+}
+.imagem-detalhe {
+  max-width: 100%;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+.projeto h3 a {
+  color: #1a73e8;
+  text-decoration: none;
+}
+
+.projeto h3 a:hover {
+  text-decoration: underline;
+}
+
+/* Estilo para publicações */
+.publicacao {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.publicacao:hover {
+  transform: translateY(-5px);
+}
+
+.publicacao img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.publicacao h3 {
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+  color: #1a73e8;
+}
+
+.publicacao p {
+  font-size: 0.95rem;
+  color: #333;
+  white-space: pre-line;
+  line-height: 1.6;
+  margin-bottom: 0.8rem;
+}
+
+.publicacao small {
+  font-size: 0.8rem;
+  color: #888;
+}
