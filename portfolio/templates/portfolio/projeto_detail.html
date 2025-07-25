@@ -1,0 +1,36 @@
+{% extends 'portfolio/base.html' %}
+
+{% block title %}{{ projeto.titulo }} - Meu Portfólio{% endblock %}
+
+{% block content %}
+  <div class="projeto-detalhe">
+    <h2>{{ projeto.titulo }}</h2>
+
+    {% if projeto.imagem %}
+      <img src="{{ projeto.imagem.url }}" alt="{{ projeto.titulo }}" class="imagem-detalhe">
+    {% endif %}
+
+    <div class="descricao-detalhe">
+      <p style="white-space: pre-line;">{{ projeto.descricao }}</p>
+    </div>
+
+    <div class="project-links">
+      {% if projeto.link_demo %}
+        <a href="{{ projeto.link_demo }}" class="btn small" target="_blank">Demo</a>
+      {% endif %}
+      {% if projeto.link_codigo %}
+        <a href="{{ projeto.link_codigo }}" class="btn small" target="_blank">Código</a>
+      {% endif %}
+    </div>
+
+    <div class="tech-tags">
+      {% for tech in projeto.tecnologias.all %}
+        <span class="tech-badge">{{ tech.nome }}</span>
+      {% endfor %}
+    </div>
+
+    <p style="margin-top: 2rem;">
+      <a href="{% url 'home' %}" class="btn small">← Voltar</a>
+    </p>
+  </div>
+{% endblock %}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  {% load static %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Meu Portfólio{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'portfolio/css/style.css' %}">
+  <link rel="icon" href="{% static 'portfolio/img/favicon.png' %}" type="image/png">
+</head>
+<body>
+  <header class="site-header">
+    <div class="logo-title">
+      <h1><a href="/" aria-label="Página inicial do portfólio">Meu Portfólio - Matheus Soares</a></h1>
+    </div>
+
+    <nav class="main-nav" aria-label="Menu principal">
+      <a href="{% url 'home' %}">Projetos</a>
+      <a href="{% url 'curriculo' %}">Currículo</a>
+      <a href="{% url 'publicacoes' %}">Publicações</a>
+    </nav>
+
+    <div class="lang-switch" aria-label="Trocar idioma">
+      <a href="{% url 'curriculo' %}">🇧🇷 PT</a> |
+      <a href="{% url 'curriculo_en' %}">🇬🇧 EN</a>
+    </div>
+  </header>
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer>
+    <p>© 2025 Matheus da Silva Soares</p>
+  </footer>
+
+  <script src="{% static 'portfolio/js/main.js' %}"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

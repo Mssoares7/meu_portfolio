@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: meu-portfolio
+    env: python
+    buildCommand: "pip install -r requirements.txt && python manage.py migrate && python manage.py collectstatic --noinput"
+    startCommand: "gunicorn meu_portfolio.wsgi"
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: meu_portfolio.settings
+      - key: SECRET_KEY
+        value: sua-secret-key-aqui
+      - key: DEBUG
+        value: False

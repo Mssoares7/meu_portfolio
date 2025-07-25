@@ -1,0 +1,46 @@
+{% extends 'portfolio/base.html' %}
+
+{% block title %}Projetos - Meu Portfólio{% endblock %}
+
+{% block content %}
+  <h2>Meus Projetos</h2>
+
+  <!-- Filtros por tecnologia -->
+  <div class="filters">
+    <button class="filter-btn active" data-tecnologia="all">Todos</button>
+    {% for tecnologia in tecnologias %}
+      <button class="filter-btn" data-tecnologia="{{ tecnologia.nome }}">{{ tecnologia.nome }}</button>
+    {% endfor %}
+  </div>
+
+  <!-- Grid de projetos -->
+  <div class="projetos">
+    {% for projeto in projetos %}
+      <div class="projeto fade-in" data-tecnologias="{% for tech in projeto.tecnologias.all %}{{ tech.nome }} {% endfor %}">
+        
+        {% if projeto.imagem %}
+          <img src="{{ projeto.imagem.url }}" alt="Imagem de {{ projeto.titulo }}">
+        {% endif %}
+
+        <h3><a href="{% url 'projeto_detail' projeto.pk %}">{{ projeto.titulo }}</a></h3>
+
+        <p class="descricao-completa">{{ projeto.descricao|linebreaksbr }}</p>
+
+        <div class="project-links">
+          {% if projeto.link_demo %}
+            <a href="{{ projeto.link_demo }}" class="btn small" target="_blank" rel="noopener noreferrer">Demo</a>
+          {% endif %}
+          {% if projeto.link_codigo %}
+            <a href="{{ projeto.link_codigo }}" class="btn small" target="_blank" rel="noopener noreferrer">Código</a>
+          {% endif %}
+        </div>
+
+        <div class="tech-tags">
+          {% for tech in projeto.tecnologias.all %}
+            <span class="tech-badge">{{ tech.nome }}</span>
+          {% endfor %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

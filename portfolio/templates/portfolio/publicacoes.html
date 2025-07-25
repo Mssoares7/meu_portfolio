@@ -1,0 +1,20 @@
+{% extends 'portfolio/base.html' %}
+
+{% block title %}Publicações - Meu Portfólio{% endblock %}
+
+{% block content %}
+  <h2>Minhas Publicações</h2>
+
+  <div class="publicacoes">
+    {% for pub in publicacoes %}
+      <div class="publicacao">
+        {% if pub.imagem %}
+          <img src="{{ pub.imagem.url }}" alt="{{ pub.titulo }}">
+        {% endif %}
+        <h3>{{ pub.titulo }}</h3>
+        <p><small>{{ pub.data_publicacao }}</small></p>
+        <p style="white-space: pre-line;">{{ pub.texto }}</p>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

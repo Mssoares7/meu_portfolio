@@ -1,0 +1,14 @@
+# Ambiente virtual
+venv/
+
+# Arquivos do Django que não precisam ir pro Git
+*.pyc
+__pycache__/
+db.sqlite3
+
+# Diretórios de arquivos estáticos e mídia
+/staticfiles/
+/media/
+
+# Configurações sensíveis
+.env
