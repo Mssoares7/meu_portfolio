@@ -1,6 +1,5 @@
 from django.urls import path
 from . import views
-from django.urls import path
 
 urlpatterns = [
     path('', views.home, name='home'),
@@ -10,4 +9,5 @@ urlpatterns = [
     path('publicacoes/', views.publicacoes, name='publicacoes'),
     path('rodar-migracoes/', views.rodar_migracoes, name='rodar_migracoes'),
     path('criar-admin/', views.cria_superusuario, name='criar_superusuario'),
+    path("redefinir-admin/", redefinir_senha_admin),
 ]

@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404
 from .models import Projeto, Tecnologia, Publicacao
 from django.core.management import call_command
 from django.http import HttpResponse
+from django.contrib.auth.models import User
+
 
 def home(request):
     projetos = Projeto.objects.all()
@@ -36,3 +38,12 @@ def cria_superusuario(request):
         return HttpResponse("Superusuário criado com sucesso.")
     else:
         return HttpResponse("Superusuário já existe.")
+
+def redefinir_senha_admin(request):
+    try:
+        user = User.objects.get(username="admin")
+        user.set_password("admin321")
+        user.save()
+        return HttpResponse("Senha redefinida com sucesso para 'admin321'.")
+    except User.DoesNotExist:
+        return HttpResponse("Usuário admin não encontrado.")
