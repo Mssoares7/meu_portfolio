@@ -1,7 +1,6 @@
 from pathlib import Path
 import os
 import dj_database_url
-import django_heroku
 
 # Caminho base do projeto
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -9,7 +8,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Segurança
 SECRET_KEY = os.environ.get('SECRET_KEY', 'unsafe-secret-key-dev')
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
-ALLOWED_HOSTS = ['*']  # Altere isso para domínios específicos em produção
+ALLOWED_HOSTS = ['*']
 
 # Aplicativos instalados
 INSTALLED_APPS = [
@@ -20,7 +19,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # Apps do projeto
+    # Seu app
     'portfolio',
 
     # Cloudinary
@@ -31,7 +30,7 @@ INSTALLED_APPS = [
 # Middlewares
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # serve arquivos estáticos no deploy
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # para arquivos estáticos no deploy
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -40,7 +39,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# Configuração de URLs e WSGI
+# URLs e WSGI
 ROOT_URLCONF = 'config.urls'
 
 TEMPLATES = [
@@ -61,7 +60,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-# Banco de dados (Render ou local)
+# Banco de dados
 DATABASES = {
     'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
 }
@@ -80,19 +79,20 @@ TIME_ZONE = 'America/Sao_Paulo'
 USE_I18N = True
 USE_TZ = True
 
-# Arquivos estáticos (CSS, JS etc.)
+# Arquivos estáticos
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# Mídia (usado apenas localmente em modo DEBUG)
+# Arquivos de mídia locais (usado apenas em DEBUG=True)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# Ajustes automáticos para produção no Render
+# Django Heroku (Render também usa isso)
+import django_heroku
 django_heroku.settings(locals())
 
-# ⚠️ Cloudinary (deve vir depois do django_heroku.settings)
+# ✅ Cloudinary configurado corretamente DEPOIS de django_heroku
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 CLOUDINARY_STORAGE = {
@@ -101,5 +101,5 @@ CLOUDINARY_STORAGE = {
     'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET'),
 }
 
-# Chave primária padrão
+# Auto campo padrão
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
