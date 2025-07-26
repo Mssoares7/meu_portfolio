@@ -88,11 +88,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# Django Heroku (Render também usa isso)
-import django_heroku
-django_heroku.settings(locals())
-
-# ✅ Cloudinary configurado corretamente DEPOIS de django_heroku
+# Configura Cloudinary (precisa vir ANTES do django_heroku.settings)
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 CLOUDINARY_STORAGE = {
@@ -101,5 +97,6 @@ CLOUDINARY_STORAGE = {
     'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET'),
 }
 
-# Auto campo padrão
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+# Django Heroku (Render também usa isso)
+import django_heroku
+django_heroku.settings(locals())
